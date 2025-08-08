@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:
+    ? .Values.deploy.deploymentName:
+    :
+spec:
+  replicas:
+    ? .Values.deploy.replicasCnt:
+    :
+  selector:
+    matchLabels:
+      components:
+        ? .Values.deploy.deployComponents:
+        :
+  template:
+    metadata:
+      name:
+        ? .Values.deploy.podName:
+        :
+      labels:
+        components:
+          ? .Values.deploy.deployComponents:
+          :
+    spec:
+      containers:
+        - name:
+            ? .Values.deploy.container.name:
+            :
+          image:
+            ? .Values.deploy.container.image:
+            :
+          ports:
+            - containerPort:
+                ? .Values.deploy.container.port:
+                :
+          resources:
+            limits:
+              memory:
+                ? .Values.deploy.limits.memory | quote:
+                :
+              cpu:
+                ? .Values.deploy.limits.cpu | quote:
+                :

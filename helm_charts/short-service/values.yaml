@@ -1,0 +1,16 @@
+deploy:
+  deploymentName: short-app-deployment
+  replicasCnt: 1
+  deployComponents: frontend
+  podName: short-app
+  container:
+    name: conv-app
+    image: antonlarichev/conv-app:1.2
+    port: 80
+  limits:
+    memory: 512Mi
+    cpu: 500m
+service:
+  serviceName: short-app-service
+  nodePort: 31200
+  servicePort: 3000
